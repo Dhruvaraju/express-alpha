@@ -8,16 +8,6 @@ Table of Contents
 - [Creating simple routes in server](#creating-simple-routes-in-server)
 - [Responding with JSON](#responding-with-json)
 - [Providing static files as response](#providing-static-files-as-response)
-responding- [Creating a simple express app](#creating-a-simple-express-app)
-  - [Adding dev dependencies](#adding-dev-dependencies)
-- [What is express](#what-is-express)
-- [Prerequisites required for running express](#prerequisites-required-for-running-express)
-- [Creating a simple express project](#creating-a-simple-express-project)
-- [Creating a simple express app](#creating-a-simple-express-app)
-  - [Adding dev dependencies](#adding-dev-dependencies)
-- [Creating simple routes in server](#creating-simple-routes-in-server)
-- [Responding with JSON](#responding-with-json)
-- [Providing static files as response](#providing-static-files-as-response)
 
 ## What is express
 
