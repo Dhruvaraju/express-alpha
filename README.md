@@ -8,6 +8,11 @@ Table of Contents
 - [Creating simple routes in server](#creating-simple-routes-in-server)
 - [Responding with JSON](#responding-with-json)
 - [Providing static files as response](#providing-static-files-as-response)
+- [Routing and route handling using express](#routing-and-route-handling-using-express)
+- [Routing](#routing)
+- [Route Handlers](#route-handlers)
+- [Ways to respond](#ways-to-respond)
+- [Path Parameters](#path-parameters)
 
 ## What is express
 
@@ -130,3 +135,70 @@ app.get("/mock-data", (req, res) => {
 - Add `app.use("/resources", express.static("resources")); ` in index.js
   - By adding the above line the files in resources folder will be accessible on uri /resources
   - example `http://localhost:3000/resources/binary-silhouette.jpg` will give 'binary-silhouette.jpg' image.
+
+## Routing and route handling using express
+
+## Routing
+
+- Earlier we have seen how to make express to respond to a route provided for get, put, post, delete
+- We can expose a single route to show different behavior for different http calls.
+- In the below example the same route '/detail' will be responding with different strings based on different calls made.
+- This is also called as route chaining
+
+```javascript
+app
+  .route("/detail")
+  .get((req, res) => {
+    console.log("user details entered: " + req.params.user);
+    res.send("Get call initiated on port 5000");
+  })
+  .put((req, res) => {
+    res.send("Put call initiated on port 5000");
+  })
+  .post((req, res) => {
+    res.send("post call initiated on port 5000");
+  })
+  .delete((req, res) => {
+    res.send("delete call initiated on port 5000");
+  });
+```
+
+## Route Handlers
+
+- Sometimes we need to perform few tasks after responding to a service call, for which we do not have to send any data for the service consumer.
+- Use next for the same, implementation code is mentioned below.
+- We need to add next as a new parameter to the function input.
+
+```javascript
+app.get(
+  "/route-handler",
+  (req, res, next) => {
+    res.send("This is from route handler response");
+    next();
+  },
+  (req, res) => {
+    console.log("This is from the next function of route handler");
+  }
+);
+```
+
+## Ways to respond
+
+- By using response object we can respond with a string, json, file download and more things
+- refer to the response object of express documentation.
+  `javascript res.send(), res.download(), res.redirect() `
+
+## Path Parameters
+
+- we can add path parameters by using a colon an the end of variable.
+- Implementation example is provided below, we can use multiple path parameters in a single route.
+- In the below mentioned example both user and id are path parameters
+- so we can make a get call like http://localhost:8000/dexter/002, here user is dexter and id is 002.
+- path parameters are considered as strings so you need to type cast them before using them as other data types.
+
+```javascript
+app.route("/detail/:user/:id").get((req, res) => {
+  console.log("user details entered: " + req.params.user);
+  res.send("Get call initiated on port 5000");
+});
+```
